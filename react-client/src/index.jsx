@@ -13,7 +13,7 @@ class App extends React.Component {
       currentImageData: {}
     };
     this.classify = this.classify.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.swapImage = this.swapImage.bind(this);
     this.getClassified = this.getClassified.bind(this);
   }
 
@@ -32,6 +32,7 @@ class App extends React.Component {
       })
       .then((data) => {
         this.setState({ currentImageData: data });
+        this.getClassified();
       })
       .catch((err) => {
         console.log(err);
@@ -39,8 +40,9 @@ class App extends React.Component {
   }
 
   swapImage(index) {
+    console.log(index);
     this.setState((prevState) => {
-      return { currentImageData: prevState[index] };
+      return { currentImageData: prevState.recentClassified[index] };
     });
   }
 
