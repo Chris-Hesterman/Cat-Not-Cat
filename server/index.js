@@ -2,8 +2,9 @@ require('custom-env').env();
 const VisualRecognitionV3 = require('ibm-watson/visual-recognition/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
-const items = require('../database-mongo');
+const db = require('../database-mongo');
 
 const visualRecognition = new VisualRecognitionV3({
   version: '2018-03-19',
@@ -13,13 +14,12 @@ const visualRecognition = new VisualRecognitionV3({
   url: process.env.VISUAL_RECOGNITION_URL
 });
 
-const app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/stored', function (req, res) {
-  items.selectAll(function (err, data) {
+app.get('/stored', (req, res) => {
+  cats((err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -33,20 +33,21 @@ app.post('/recognize', (req, res) => {
   classifyParams = {
     url: req.body.url
   };
-  visualRecognition
-    .classify(classifyParams)
-    .then((response) => {
-      const classifiedImage = response.result.images[0].classifiers;
-      // response.result.images[0].source_url
-      console.log(classifiedImage);
-      res.send(classifiedImage);
-    })
-    .then(() => {
-      res.end();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  // visualRecognition
+  //   .classify(classifyParams)
+  //   .then((response) => {
+  //     const classifiedImage = response.result.images[0].classifiers;
+  //     // response.result.images[0].source_url
+  //     console.log(classifiedImage);
+  //     res.send(classifiedImage);
+  //   })
+  //   .then(() => {
+  //     res.end();
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  res.end();
 });
 
 app.listen(3000, function () {

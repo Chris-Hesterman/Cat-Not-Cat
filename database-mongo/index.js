@@ -1,31 +1,38 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-
-var db = mongoose.connection;
-
-db.on('error', function() {
-  console.log('mongoose connection error');
+var promise = mongoose.connect('mongodb://localhost/cats', {
+  useMongoClient: true
 });
 
-db.once('open', function() {
-  console.log('mongoose connected successfully');
-});
+promise
+  .then((db) => {
+    console.log('mongoose connected successfully');
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
-});
+    let imageSchema = mongoose.Schema({
+      url: String,
+      isCat: Boolean,
+      date: {
+        type: Date,
+        default: Date.now
+      }
+    });
 
-var Item = mongoose.model('Item', itemSchema);
+    let Images = mongoose.model('Image', imageSchema);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, items);
+    let addImageURL = (document) => {
+      Images.collection.save(document, (err, docs) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log(docs, ' saved to db');
+      });
     }
+    let getClassifiedImgURLs = () => {
+      return Images.find().sort(date: -1)limit(25)
+    };
+    module.exports.getClassifiedImgURLs = getClassifiedImgURLs;
+    module.exports.addImgURL = addImageURL;
+  })
+  .catch((err) => {
+    throw err;
   });
-};
-
-module.exports.selectAll = selectAll;
