@@ -1,14 +1,16 @@
 import React from 'react';
 import ListItem from './ListItem.jsx';
 
-const List = (props) => (
-  <div>
-    <h4> Classified Images </h4>
-    There are {props.urls.length} classified images.
-    {props.urls.map((url) => (
-      <ListItem url={url} />
-    ))}
-  </div>
-);
+const List = (props) => {
+  return (
+    <div>
+      <h4> Classified Images </h4>
+      There are {props.pastImages.length} classified images.
+      {props.pastImages.map((image, index) => (
+        <ListItem recent={index} key={image._id} />
+      ))}
+    </div>
+  );
+};
 
 export default List;

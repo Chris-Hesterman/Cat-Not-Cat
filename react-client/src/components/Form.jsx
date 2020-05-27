@@ -27,12 +27,13 @@ class Form extends React.Component {
       <div>
         <form onSubmit={this.handleClick}>
           <input
-            type="text"
+            type="url"
             value={this.state.imageURL}
             onChange={this.onChange}
             placeholder="Enter Image URL"
+            required
           ></input>
-          <button type="submit">Send URL</button>
+          <button>Send URL</button>
         </form>
       </div>
     );

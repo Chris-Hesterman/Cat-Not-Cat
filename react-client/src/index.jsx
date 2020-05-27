@@ -9,32 +9,39 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      urls: [],
-      currentImage:
-        'https://cdn.pixabay.com/photo/2017/11/14/13/06/kitty-2948404_960_720.jpg'
+      recentClassified: [],
+      currentImageData: {}
     };
     this.classify = this.classify.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.getClassified = this.getClassified.bind(this);
   }
 
   classify(url) {
     let data = { url: url };
-    $.ajax({
-      url: 'http://127.0.0.1:3000/recognize',
+
+    fetch('http://127.0.0.1:3000/recognize', {
       method: 'POST',
-      dataType: 'json',
-      data: data
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
     })
-      .done((response) => {
-        console.log('posted');
-        console.log(response[0].classes);
+      .then((response) => {
+        return response.json();
       })
-      .fail((err) => {
+      .then((data) => {
+        this.setState({ currentImageData: data });
+      })
+      .catch((err) => {
         console.log(err);
-      })
-      .always(() => {
-        this.getClassified();
       });
+  }
+
+  swapImage(index) {
+    this.setState((prevState) => {
+      return { currentImageData: prevState[index] };
+    });
   }
 
   getClassified() {
@@ -44,27 +51,11 @@ class App extends React.Component {
       })
       .then((data) => {
         console.log('fetched');
-        console.log(data);
+        this.setState({ recentClassified: data });
       })
       .catch((err) => {
         console.log(err);
       });
-    // $.ajax({
-    //   url: 'http://127.0.0.1:3000/stored',
-    //   method: 'GET'
-    // })
-    //   .done((response) => {
-    //     console.log(response);
-    //     if (response)
-    //       this.setState({
-    //         currentImage:
-    //           'https://cdn.pixabay.com/photo/2017/11/14/13/06/kitty-2948404_960_720.jpg'
-    //       });
-    //     // this.setState({ urls: response.body.urls });
-    //   })
-    //   .fail((err) => {
-    //     console.log(err);
-    //   });
   }
 
   componentDidMount() {
@@ -76,11 +67,19 @@ class App extends React.Component {
       <div className="content">
         <div className="img_text">
           <h1>Is it a Cat?</h1>
-          <Contestant image={this.state.currentImage} />
+          <Contestant
+            image={
+              this.state.currentImageData.url ||
+              'https://cdn.pixabay.com/photo/2017/11/14/13/06/kitty-2948404_960_720.jpg'
+            }
+          />
           <Form classify={this.classify} />
         </div>
         <div className="list">
-          <List urls={this.state.urls} />
+          <List
+            pastImages={this.state.recentClassified}
+            swapImage={this.swapImage}
+          />
         </div>
       </div>
     );

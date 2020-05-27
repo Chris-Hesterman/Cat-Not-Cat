@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var promise = mongoose.connect('mongodb://localhost/cats', {
-  useMongoClient: true
+  useNewUrlParser: true
 });
 
 promise
@@ -26,12 +26,14 @@ promise
         }
         console.log(docs, ' saved to db');
       });
-    }
-    let getClassifiedImgURLs = () => {
-      return Images.find().sort(date: -1)limit(25)
     };
+
+    let getClassifiedImgURLs = () => {
+      return Images.find().sort({ date: -1 }).limit(25);
+    };
+
     module.exports.getClassifiedImgURLs = getClassifiedImgURLs;
-    module.exports.addImgURL = addImageURL;
+    module.exports.addImageURL = addImageURL;
   })
   .catch((err) => {
     throw err;

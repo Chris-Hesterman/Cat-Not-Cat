@@ -96,6 +96,7 @@ button:hover {
   width: 20vw;
   margin-top: 80px;
   height: 70vh;
+  overflow-x: hidden;
 }
 
 h4 {
