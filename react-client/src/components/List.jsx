@@ -8,17 +8,24 @@ class List extends React.Component {
   }
 
   handleClick(e) {
-    this.props.swapImage(+e.target.textContent);
+    console.log(+e.target.textContent[0]);
+    this.props.swapImage(+e.target.textContent[0]);
   }
 
   render() {
     let images = this.props.pastImages.map((image, index) => (
-      <ListItem recent={index} key={image._id} onClick={this.handleClick} />
+      <ListItem
+        recent={index}
+        isCat={image.isCat}
+        key={image._id}
+        onClick={this.handleClick}
+      />
     ));
     return (
       <div>
         <h4> Classified Images </h4>
-        There are {this.props.pastImages.length} classified images.
+        Here are the {this.props.pastImages.length} most recently classified
+        images.
         <ul onClick={this.handleClick}>{images}</ul>
       </div>
     );

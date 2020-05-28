@@ -34,7 +34,7 @@ div.content {
   color: rgb(194, 235, 245);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000,
     1px 1px 1px #000;
@@ -44,6 +44,7 @@ div.img_text {
   font-family: Arial, sans-serif;
   font-size: 2rem;
   width: 50vw;
+  min-height: 100%;
   margin-right: 1rem;
 }
 
@@ -54,12 +55,46 @@ h1 {
 }
 
 img {
-  width: 100%;
+  width: 90%;
   border-radius: 25px;
-  margin-right: 5rem;
   box-shadow: 3px 3px 3px #444;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+}
+
+@media (min-width: 1280px) {
+  h1 {
+    color: lime;
+  }
+  div#app {
+    margin: 2vw;
+  }
+  div.content {
+    align-items: center;
+  }
+}
+
+.image_description {
+  font-size: 1rem;
+  color: rgb(194, 235, 245);
+  border: thick double black;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+.descWords {
+  text-align: left;
+  margin-left: 2rem;
+}
+
+.is_cat {
+  background: lightgreen;
+}
+
+.not_cat {
+  background: red;
 }
 
 form {
@@ -71,9 +106,12 @@ input {
   width: 60%;
   border-radius: 5px;
   background: rgb(194, 235, 245);
+  font-size: 1rem;
+  outline: none;
 }
 
 button {
+  font-size: 1rem;
   margin-left: 3rem;
   border-radius: 5px;
   background: rgb(194, 235, 245);
@@ -96,7 +134,27 @@ button:hover {
   width: 20vw;
   margin-top: 80px;
   height: 70vh;
-  overflow-x: hidden;
+}
+
+ul {
+  list-style-type: none;
+  text-align: left;
+  width: 7rem;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+li {
+  margin: 5px 0;
+  transition: all 0.4s;
+}
+li:hover {
+  color: lime;
+  letter-spacing: 1px;
+}
+
+li:active {
+  color: red;
 }
 
 h4 {
