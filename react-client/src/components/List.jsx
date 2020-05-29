@@ -23,8 +23,8 @@ class List extends React.Component {
     ));
     return (
       <div>
-        <h4>Is It Cat?</h4>
-        <h5>{this.props.pastImages.length} most recent images</h5>
+        <h4>Cats and Not Cats</h4>
+        <h5>{this.props.pastImages.length} most recent images:</h5>
         <ul onClick={this.handleClick}>{images}</ul>
       </div>
     );

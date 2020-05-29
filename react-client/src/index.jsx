@@ -116,6 +116,7 @@ class App extends React.Component {
             <span ref={this.setCatRef}>CAT!</span>
             <span ref={this.setNotCatRef}>NOT A CAT!</span>
           </h1>
+
           <Contestant
             image={this.state.currentImageData.url}
             judge={this.colorTitle}
