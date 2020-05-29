@@ -2,7 +2,7 @@ import React from 'react';
 
 const ListItem = (props) => (
   <li>
-    {props.recent} - {props.isCat ? 'IS CAT' : 'NOT CAT'}
+    {props.recent + 1} - {props.isCat ? 'IS CAT' : 'NOT CAT'}
   </li>
 );
 

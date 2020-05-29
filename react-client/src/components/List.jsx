@@ -9,7 +9,7 @@ class List extends React.Component {
 
   handleClick(e) {
     console.log(+e.target.textContent[0]);
-    this.props.swapImage(+e.target.textContent[0]);
+    this.props.swapImage(+e.target.textContent[0] - 1);
   }
 
   render() {
@@ -23,9 +23,8 @@ class List extends React.Component {
     ));
     return (
       <div>
-        <h4> Classified Images </h4>
-        Here are the {this.props.pastImages.length} most recently classified
-        images.
+        <h4>Is It Cat?</h4>
+        <h5>{this.props.pastImages.length} most recent images</h5>
         <ul onClick={this.handleClick}>{images}</ul>
       </div>
     );
