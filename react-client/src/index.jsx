@@ -19,6 +19,9 @@ class App extends React.Component {
         _id: '5ecefa47f7ed8f2495ced171'
       }
     };
+    this.setCatRef = this.setCatRef.bind(this);
+    this.setNotCatRef = this.setNotCatRef.bind(this);
+    this.colorTitle = this.colorTitle.bind(this);
     this.classify = this.classify.bind(this);
     this.swapImage = this.swapImage.bind(this);
     this.getClassified = this.getClassified.bind(this);
@@ -50,22 +53,44 @@ class App extends React.Component {
     console.log(index);
     this.setState((prevState) => {
       return { currentImageData: prevState.recentClassified[index] };
-    });
+    }, this.colorTitle);
   }
 
   getClassified() {
-    console.log(this.readoutRef.current);
     fetch('http://127.0.0.1:3000/stored')
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         console.log('fetched');
-        this.setState({ recentClassified: data });
+        this.setState({ recentClassified: data }, this.colorTitle);
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  setCatRef(element) {
+    this.titleElementCat = element;
+  }
+
+  setNotCatRef(element) {
+    this.titleElementNotCat = element;
+  }
+
+  colorTitle() {
+    console.log('green');
+    if (this.state.currentImageData.isCat) {
+      this.titleElementNotCat.style.display = 'none';
+      this.titleElementCat.style.display = 'block';
+      this.titleElementCat.classList.add('is_cat');
+    }
+    if (!this.state.currentImageData.isCat) {
+      this.titleElementCat.style.display = 'none';
+      this.titleElementNotCat.style.display = 'block';
+      this.titleElementNotCat.classList.add('not_cat');
+      this.titleElementCat.classList.remove('is_cat');
+    }
   }
 
   componentDidMount() {
@@ -87,8 +112,14 @@ class App extends React.Component {
     return (
       <div className="content">
         <div className="img_text">
-          <h1>Is it a Cat?</h1>
-          <Contestant image={this.state.currentImageData.url} />
+          <h1>
+            <span ref={this.setCatRef}>CAT!</span>
+            <span ref={this.setNotCatRef}>NOT A CAT!</span>
+          </h1>
+          <Contestant
+            image={this.state.currentImageData.url}
+            judge={this.colorTitle}
+          />
           <ImageReadout description={description + ' - ' + isCat} />
           <Form classify={this.classify} />
         </div>

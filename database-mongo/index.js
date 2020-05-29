@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-var promise = mongoose.connect('mongodb://localhost/cats', {
+var connection = mongoose.connect('mongodb://localhost/cats', {
   useNewUrlParser: true
 });
 
-promise
+connection
   .then((db) => {
     console.log('mongoose connected successfully');
 
@@ -29,7 +29,7 @@ promise
     };
 
     let getClassifiedImgURLs = () => {
-      return Images.find().sort({ date: -1 }).limit(25);
+      return Images.find().sort({ date: -1 }).limit(10);
     };
 
     module.exports.getClassifiedImgURLs = getClassifiedImgURLs;
