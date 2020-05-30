@@ -10,6 +10,7 @@ connection
     let imageSchema = mongoose.Schema({
       url: String,
       isCat: Boolean,
+      description: Array,
       date: {
         type: Date,
         default: Date.now

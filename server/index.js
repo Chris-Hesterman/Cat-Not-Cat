@@ -54,7 +54,7 @@ app.post('/recognize', (req, res) => {
       const classifiedImage = response.result.images[0].classifiers[0].classes;
       let descriptionTerms = [];
       console.log('ImageData: ', classifiedImage);
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 5; i++) {
         descriptionTerms.push(classifiedImage[i].class);
       }
 
