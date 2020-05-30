@@ -100,21 +100,14 @@ class App extends React.Component {
   render() {
     let contestantInfo = this.state.currentImageData;
     let description = contestantInfo.description.join(' - ');
-    let isCat = contestantInfo.isCat ? 'IS CAT!' : 'NOT A CAT!!';
-    // if (isCat) {
-    //   readout.classList.remove('not_cat');
-    //   readout.classList.add('is_cat');
-    // } else {
-    //   readout.classList.remove('is_cat');
-    //   readout.classList.add('not_cat');
-    // }
+    let isCat = contestantInfo.isCat ? 'IS CAT!' : 'NOT CAT!';
 
     return (
       <div className="content">
         <div className="img_text">
           <h1>
             <span ref={this.setCatRef}>CAT!</span>
-            <span ref={this.setNotCatRef}>NOT A CAT!</span>
+            <span ref={this.setNotCatRef}>NOT CAT!</span>
           </h1>
 
           <Contestant
