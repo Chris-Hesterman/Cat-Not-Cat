@@ -4,7 +4,8 @@ const ImageReadout = (props) => {
   return (
     <div className="image_description">
       <p className="descWords">
-        Keywords:<br></br>
+        <em>KEYWORDS:</em>
+        <br></br>
         {props.description}
       </p>
     </div>

@@ -80,4 +80,4 @@ Once the project moves into development, the press release can be used as a touc
 
 > Wrap it up and give pointers where the reader should go next.
 
-## Head over to www.catnotcat.com and keep an eye out for future updates including multi imageURL entry, an file uploads!
+## Head over to www.catnotcat.com and keep an eye out for future updates including multi imageURL entry, improved detection, and file uploads!
