@@ -9,7 +9,11 @@ class List extends React.Component {
 
   handleClick(e) {
     console.log(+e.target.textContent[0]);
-    this.props.swapImage(+e.target.textContent[0] - 1);
+    if (e.target.textContent[1] === '0') {
+      this.props.swapImage(9);
+    } else {
+      this.props.swapImage(+e.target.textContent[0] - 1);
+    }
   }
 
   render() {
