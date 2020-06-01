@@ -1,4 +1,4 @@
-require('custom-env').env();
+// require('custom-env').env();
 const VisualRecognitionV3 = require('ibm-watson/visual-recognition/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
 const express = require('express');
@@ -76,5 +76,5 @@ app.post('/recognize', (req, res) => {
 });
 
 app.listen(3000, function () {
-  console.log('listening on port 3000!');
+  console.log('listening on port', process.env.PORT);
 });
