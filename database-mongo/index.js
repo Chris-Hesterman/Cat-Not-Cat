@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var connection = mongoose.connect(process.env.MONGO_URI, {
+var connection = mongoose.connect(process.env.MONGODB_URI, {
   useMongoClient: true
 });
 
