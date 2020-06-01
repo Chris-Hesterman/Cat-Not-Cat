@@ -14,7 +14,7 @@ const visualRecognition = new VisualRecognitionV3({
   url: process.env.VISUAL_RECOGNITION_URL
 });
 
-app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

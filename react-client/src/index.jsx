@@ -30,7 +30,7 @@ class App extends React.Component {
   classify(url) {
     let data = { url: url };
 
-    fetch('https://glacial-woodland-56007.herokuapp.com//recognize', {
+    fetch('https://glacial-woodland-56007.herokuapp.com/recognize', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
