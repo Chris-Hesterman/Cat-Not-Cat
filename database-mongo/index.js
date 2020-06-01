@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var connection = mongoose.connect('mongodb://localhost/cats', {
+var connection = mongoose.connect(process.env.MONGO_URI + '/cats', {
   useNewUrlParser: true
 });
 
