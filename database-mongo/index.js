@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-var connection = mongoose.connect(process.env.MONGODB_URI, {
-  useMongoClient: true
+var connection = mongoose.connect('mongodb://127.0.0.1:27017/cats', {
+  useMongoClient: true,
+  useUnifiedTopography: true
 });
 
 connection

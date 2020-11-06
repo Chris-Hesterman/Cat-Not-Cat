@@ -30,7 +30,7 @@ class App extends React.Component {
   classify(url) {
     let data = { url: url };
 
-    fetch('https://glacial-woodland-56007.herokuapp.com/recognize', {
+    fetch('http://127.0.0.1:3000/recognize', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ class App extends React.Component {
   }
 
   getClassified() {
-    fetch('https://glacial-woodland-56007.herokuapp.com/stored')
+    fetch('http://127.0.0.1:3000/stored')
       .then((response) => {
         return response.json();
       })
@@ -66,6 +66,7 @@ class App extends React.Component {
         this.setState({ recentClassified: data }, this.colorTitle);
       })
       .catch((err) => {
+        console.log('Problem');
         console.log(err);
       });
   }

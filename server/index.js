@@ -1,4 +1,5 @@
-// require('custom-env').env();
+require('dotenv').config();
+const path = require('path');
 const VisualRecognitionV3 = require('ibm-watson/visual-recognition/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
 const express = require('express');
@@ -14,17 +15,15 @@ const visualRecognition = new VisualRecognitionV3({
   url: process.env.VISUAL_RECOGNITION_URL
 });
 
-app.use(express.static(__dirname + '../react-client/dist'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '../react-client/dist')));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/stored', (req, res) => {
   db.getClassifiedImgURLs()
     .then((data) => {
-      res.send(data);
-    })
-    .then(() => {
-      res.end();
+      res.set('Access-Control-Allow-Origin', '*');
+      res.status(200).send(data);
     })
     .catch((err) => {
       console.log(err);
@@ -65,6 +64,7 @@ app.post('/recognize', (req, res) => {
         date: new Date()
       };
       db.addImageURL(document);
+      res.set('Access-Control-Allow-Origin', '*');
       res.send(document);
     })
     .then(() => {
@@ -75,6 +75,6 @@ app.post('/recognize', (req, res) => {
     });
 });
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log('listening on port', process.env.PORT);
+app.listen(3000, function () {
+  console.log('listening on port 3000');
 });
